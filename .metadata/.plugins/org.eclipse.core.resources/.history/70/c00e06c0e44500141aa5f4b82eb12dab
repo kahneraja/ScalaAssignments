@@ -1,0 +1,26 @@
+object Research {
+  def factorial(x: Int): Int =
+    if (x == 0) 1 else x * factorial(x - 1)
+  
+  def fTailProduct(x: Int, next: Int): Int =
+  	x * fTail(next)
+  
+  def fTail(x: Int): Int =
+    if (x == 0) 1 else fTailProduct(x, x - 1)
+
+  factorial(5)
+  factorial(1)
+  factorial(2)
+  factorial(3)
+  
+  def filter(chars: List[Char]): List[Char] = chars.filter{ e => e == '(' || e == ')'}
+  
+  def balance(chars: List[Char]): Boolean =
+  	(filter(chars).length == 2)
+  
+  val s1 = List('a', '(', 'b', ')', 'c')
+  balance(s1)
+  
+  val s2 = List('a', '(', 'c')
+  balance(s2)
+}

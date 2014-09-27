@@ -1,0 +1,6 @@
+object PascalSuite {
+  	def f(x: Int): Int =                      //> res0: Int = 120
+  		if (x == 0) 0 else x * f(x - 1)
+  		
+  	f(5)
+  }

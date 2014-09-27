@@ -1,0 +1,6 @@
+object Research {
+  	def factorial(x: Int): Int =
+  		if (x == 0) 0 else x * factorial(x - 1)
+  		
+  	(5factorial)
+  }

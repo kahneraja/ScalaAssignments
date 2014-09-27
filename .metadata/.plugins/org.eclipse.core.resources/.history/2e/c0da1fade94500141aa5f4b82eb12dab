@@ -1,0 +1,40 @@
+object Research {
+  def factorial(x: Int): Int =
+    if (x == 0) 1 else x * factorial(x - 1)
+  
+  def fTailProduct(x: Int, next: Int): Int =
+  	x * fTail(next)
+  
+  def fTail(x: Int): Int =
+    if (x == 0) 1 else fTailProduct(x, x - 1)
+
+  factorial(5)
+  factorial(1)
+  factorial(2)
+  factorial(3)
+  
+  def filter(chars: List[Char]): List[Char] = chars.filter{ e => e == '(' || e == ')'}
+ 
+  def counter(chars: List[Char], openCount:Int): Int =
+  	if (chars.isEmpty || openCount < 0)
+  		openCount
+  	else
+  		if (chars.head == '(')
+  			counter(chars.tail, openCount + 1)
+  		else if (chars.head == ')')
+  		  counter(chars.tail, openCount - 1)
+			else
+				counter(chars.tail, openCount)
+  
+  def balance(chars: List[Char]): Boolean =
+  		if (counter(chars, 0) == 0) true else false
+  		
+  balance("a(b)c d".toList)
+  balance("a(bcd".toList)
+  balance(")(".toList)
+  balance("())(".toList)
+  balance(")")
+  balance("()")
+  balance("(....(((((...))))")
+	
+}
