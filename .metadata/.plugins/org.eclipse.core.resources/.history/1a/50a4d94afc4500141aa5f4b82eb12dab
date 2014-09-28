@@ -1,0 +1,64 @@
+object Research {
+  def factorial(x: Int): Int =
+    if (x == 0) 1 else x * factorial(x - 1)
+
+  def fTailProduct(x: Int, next: Int): Int =
+    x * fTail(next)
+
+  def fTail(x: Int): Int =
+    if (x == 0) 1 else fTailProduct(x, x - 1)
+
+  factorial(5)
+  factorial(1)
+  factorial(2)
+  factorial(3)
+
+  def filter(chars: List[Char]): List[Char] = chars.filter { e => e == '(' || e == ')' }
+
+  def balance(chars: List[Char]): Boolean = {
+    def counter(chars: List[Char], openCount: Int): Int =
+      if (chars.isEmpty || openCount < 0)
+        openCount
+      else if (chars.head == '(')
+        counter(chars.tail, openCount + 1)
+      else if (chars.head == ')')
+        counter(chars.tail, openCount - 1)
+      else
+        counter(chars.tail, openCount)
+
+    if (counter(chars, 0) == 0) true else false
+  }
+
+  balance("a(b)c d".toList)
+  balance("a(bcd".toList)
+  balance(")(".toList)
+  balance("())(".toList)
+  balance(")".toList)
+  balance("()".toList)
+  balance("(....(((((...))))))".toList)
+  balance("(())".toList)
+
+
+	def accumulateChildren(accumulatedMoney: Int, combinations: Int, denomination: Int, denominations: List[Int], money: Int): Int =
+		if (accumulatedMoney + denomination <= money)
+			accumulateChildren(accumulatedMoney + denomination, combinations + 1, denomination, denominations, money)
+		else if (!denominations.isEmpty)
+			accumulateChildren(accumulatedMoney, combinations, denominations.head, denominations.tail, money)
+    else
+    	combinations
+			
+	
+  def countChange(money: Int, coins: List[Int]): Int =
+  		accumulateChildren(0, 0, coins.head, coins.tail, money)
+
+	10 % 6
+	6 % 10
+
+  countChange(1, List(1))
+  countChange(2, List(1,2))
+	countChange(5, List(1,2))
+	countChange(4, List(1,2))
+	countChange(4, List(1,2))
+	countChange(300,List(500,5,50,100,20,200,10))
+	
+}

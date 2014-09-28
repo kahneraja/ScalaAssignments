@@ -1,0 +1,90 @@
+object Research {
+  def factorial(x: Int): Int =
+    if (x == 0) 1 else x * factorial(x - 1)       //> factorial: (x: Int)Int
+
+  def fTailProduct(x: Int, next: Int): Int =
+    x * fTail(next)                               //> fTailProduct: (x: Int, next: Int)Int
+
+  def fTail(x: Int): Int =
+    if (x == 0) 1 else fTailProduct(x, x - 1)     //> fTail: (x: Int)Int
+
+  factorial(5)                                    //> res0: Int = 120
+  factorial(1)                                    //> res1: Int = 1
+  factorial(2)                                    //> res2: Int = 2
+  factorial(3)                                    //> res3: Int = 6
+
+  def filter(chars: List[Char]): List[Char] = chars.filter { e => e == '(' || e == ')' }
+                                                  //> filter: (chars: List[Char])List[Char]
+
+  def balance(chars: List[Char]): Boolean = {
+    def counter(chars: List[Char], openCount: Int): Int =
+      if (chars.isEmpty || openCount < 0)
+        openCount
+      else if (chars.head == '(')
+        counter(chars.tail, openCount + 1)
+      else if (chars.head == ')')
+        counter(chars.tail, openCount - 1)
+      else
+        counter(chars.tail, openCount)
+
+    if (counter(chars, 0) == 0) true else false
+  }                                               //> balance: (chars: List[Char])Boolean
+
+  balance("a(b)c d".toList)                       //> res4: Boolean = true
+  balance("a(bcd".toList)                         //> res5: Boolean = false
+  balance(")(".toList)                            //> res6: Boolean = false
+  balance("())(".toList)                          //> res7: Boolean = false
+  balance(")".toList)                             //> res8: Boolean = false
+  balance("()".toList)                            //> res9: Boolean = true
+  balance("(....(((((...))))))".toList)           //> res10: Boolean = true
+  balance("(())".toList)                          //> res11: Boolean = true
+
+  def addNextDomination(denomination: Int, denominations: List[Int], allDenominations: List[Int], total: Int, target: Int, combinations: Int): Int =
+    if (denominations.isEmpty)
+    	combinations
+    else
+      addNextDomination(denominations.head, denominations.tail, allDenominations, total, target, combinations) + addDenomination(denominations.head, allDenominations, total, target, combinations)
+                                                  //> addNextDomination: (denomination: Int, denominations: List[Int], allDenomin
+                                                  //| ations: List[Int], total: Int, target: Int, combinations: Int)Int
+
+  def addAllDenominations(denominations: List[Int], total: Int, target: Int, combinations: Int): Int =
+    if (denominations.isEmpty)
+    	combinations
+    else
+      addNextDomination(denominations.head, denominations.tail, denominations, total, target, combinations)
+                                                  //> addAllDenominations: (denominations: List[Int], total: Int, target: Int, co
+                                                  //| mbinations: Int)Int
+
+  def addDenomination(denomination: Int, denominations: List[Int], total: Int, target: Int, combinations: Int): Int =
+    if (total + denomination == target)
+      // match!
+      combinations + 1
+    else if (total + denomination > target)
+      combinations
+    else
+      // try adding every denomination
+      combinations + addAllDenominations(denominations, total, target, combinations)
+                                                  //> addDenomination: (denomination: Int, denominations: List[Int], total: Int, 
+                                                  //| target: Int, combinations: Int)Int
+
+  def countChange(money: Int, coins: List[Int]): Int =
+    addDenomination(coins.head, coins, 0, money, 0)
+                                                  //> countChange: (money: Int, coins: List[Int])Int
+
+  countChange(4, List(1, 2))                      //> java.lang.StackOverflowError
+                                                  //| 	at java.lang.Integer.intValue(Unknown Source)
+                                                  //| 	at scala.runtime.BoxesRunTime.unboxToInt(BoxesRunTime.java:105)
+                                                  //| 	at Research$$anonfun$main$1.addNextDomination$1(Research.scala:45)
+                                                  //| 	at Research$$anonfun$main$1.addAllDenominations$1(Research.scala:51)
+                                                  //| 	at Research$$anonfun$main$1.addDenomination$1(Research.scala:61)
+                                                  //| 	at Research$$anonfun$main$1.addNextDomination$1(Research.scala:45)
+                                                  //| 	at Research$$anonfun$main$1.addAllDenominations$1(Research.scala:51)
+                                                  //| 	at Research$$anonfun$main$1.addDenomination$1(Research.scala:61)
+                                                  //| 	at Research$$anonfun$main$1.addNextDomination$1(Research.scala:45)
+                                                  //| 	at Research$$anonfun$main$1.addAllDenominations$1(Research.scala:51)
+                                                  //| 	at Research$$anonfun$main$1.addDenomination$1(Research.scala:61)
+                                                  //| 	at Research$$anonfun$main$1.addNextDomination$1(Research.scala:45)
+                                                  //| 	at Research$$anonfun$main$1.addAllDenominations$1(Research.scala:51)
+                                                  //| 	at Research$$anonfu
+                                                  //| Output exceeds cutoff limit.
+}
