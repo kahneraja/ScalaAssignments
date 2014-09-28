@@ -36,18 +36,31 @@ object Research {;import org.scalaide.worksheet.runtime.library.WorksheetSupport
   balance(")".toList);System.out.println("""res8: Boolean = """ + $show(res$8));$skip(23); val res$9 = 
   balance("()".toList);System.out.println("""res9: Boolean = """ + $show(res$9));$skip(40); val res$10 = 
   balance("(....(((((...))))))".toList);System.out.println("""res10: Boolean = """ + $show(res$10));$skip(25); val res$11 = 
-  balance("(())".toList);System.out.println("""res11: Boolean = """ + $show(res$11));$skip(225); 
+  balance("(())".toList);System.out.println("""res11: Boolean = """ + $show(res$11));$skip(332); 
 
 
 	
-
-  def countChange(money: Int, coins: List[Int]): Int =
-    if (money < 0 || coins.isEmpty)
-      0
-    else if (money == 0)
-      1
-    else
-      countChange(money - coins.head, coins) + countChange(money, coins.tail);System.out.println("""countChange: (money: Int, coins: List[Int])Int""");$skip(30); val res$12 = 
+	
+	
+	
+	
+	
+	
+	
+	
+	def countChange(money: Int, coins: List[Int]): Int = {
+		
+		def iter(balance: Int, coins: List[Int]): Int =
+			if (coins.isEmpty || balance > money)
+				0 // overflow
+			else if (balance == money)
+				1 // match!
+			else
+				iter(balance + coins.head, coins) + iter(balance, coins.tail)
+		
+		iter(0,  coins)
+	};System.out.println("""countChange: (money: Int, coins: List[Int])Int""");$skip(34); val res$12 = 
+		
   
   countChange(1, List(1));System.out.println("""res12: Int = """ + $show(res$12));$skip(26); val res$13 = 
   countChange(2, List(1));System.out.println("""res13: Int = """ + $show(res$13));$skip(30); val res$14 = 

@@ -41,12 +41,17 @@ object Main {
   /**
    * Exercise 3
    */
-    def countChange(money: Int, coins: List[Int]): Int =
-    if (money < 0 || coins.isEmpty)
-      0
-    else if (money == 0)
-      1
-    else
-      countChange(money - coins.head, coins) + countChange(money, coins.tail)
+	def countChange(money: Int, coins: List[Int]): Int = {
+		
+		def iter(balance: Int, coins: List[Int]): Int =
+			if (coins.isEmpty || balance > money)
+				0 // overflow
+			else if (balance == money)
+				1 // match!
+			else
+				iter(balance + coins.head, coins) + iter(balance, coins.tail)
+		
+		iter(0,  coins)
+	}
 
 }

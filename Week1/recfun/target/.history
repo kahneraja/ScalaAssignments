@@ -6,3 +6,7 @@ sbt submit kahneraja@gmail.com ugNYCTRFYr
 run
 styleCheck
 submit kahneraja@gmail.com ugNYCTRFYr
+test
+run
+styleCheck
+submit kahneraja@gmail.com ugNYCTRFYr

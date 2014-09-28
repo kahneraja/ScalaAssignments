@@ -41,15 +41,27 @@ object Research {
 
 
 	
-
-  def countChange(money: Int, coins: List[Int]): Int =
-    if (money < 0 || coins.isEmpty)
-      0
-    else if (money == 0)
-      1
-    else
-      countChange(money - coins.head, coins) + countChange(money, coins.tail)
-                                                  //> countChange: (money: Int, coins: List[Int])Int
+	
+	
+	
+	
+	
+	
+	
+	
+	def countChange(money: Int, coins: List[Int]): Int = {
+		
+		def iter(balance: Int, coins: List[Int]): Int =
+			if (coins.isEmpty || balance > money)
+				0 // overflow
+			else if (balance == money)
+				1 // match!
+			else
+				iter(balance + coins.head, coins) + iter(balance, coins.tail)
+		
+		iter(0,  coins)
+	}                                         //> countChange: (money: Int, coins: List[Int])Int
+		
   
   countChange(1, List(1))                         //> res12: Int = 1
   countChange(2, List(1))                         //> res13: Int = 1
