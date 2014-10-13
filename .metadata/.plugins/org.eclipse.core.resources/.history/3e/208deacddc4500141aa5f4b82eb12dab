@@ -1,3 +1,0 @@
-object PascalSuite {
-  	5 * 4 * 3 * 2 * 1                         //> res0: Int = 24
-  }

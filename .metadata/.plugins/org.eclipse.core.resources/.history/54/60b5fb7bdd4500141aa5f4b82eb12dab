@@ -1,6 +1,0 @@
-object Research {
-  	def f(x: Int): Int =
-  		if (x == 0) 0 else x * f(x - 1)   //> f: (x: Int)Int
-  		
-  	f(5)                                      //> res0: Int = 0
-  }
