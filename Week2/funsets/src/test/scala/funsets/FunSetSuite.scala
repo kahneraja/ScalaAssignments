@@ -77,8 +77,6 @@ class FunSetSuite extends FunSuite {
     val s1 = singletonSet(1)
     val s2 = singletonSet(2)
     val s3 = singletonSet(3)
-    val sA = Set(1,2,3,4,5)
-    val sB = Set(5,6,7,8,9,10)
   }
 
   /**
@@ -104,46 +102,53 @@ class FunSetSuite extends FunSuite {
     }
   }
 
-  test("union contains all elements") {
-    new TestSets {
-      val s = union(sA, sB)
-      assert(contains(s, 1), "Union 1")
-      assert(contains(s, 2), "Union 2")
-      assert(contains(s, 3), "Union 3")
-      assert(contains(s, 4), "Union 4")
-      assert(contains(s, 5), "Union 5")
-      assert(contains(s, 6), "Union 6")
-      assert(contains(s, 7), "Union 7")
-      assert(contains(s, 8), "Union 8")
-      assert(contains(s, 9), "Union 9")
-      assert(contains(s, 10), "Union 10")
+  test("union of {1,2,3,4,5} and {5,6,7,8,9,10}") {
+    new TestSets {     
+      val s = union({ x => x > 0 && x < 6 }, { x => x > 4 && x < 11 })
+      assert(FunSets.toString(s) == "{1,2,3,4,5,6,7,8,9,10}", "Match:" + FunSets.toString(s))
     }
   }  
-  
-  test("diff contains restricted elements") {
+    
+  test("diff of {1..1000} and {1,2,3,4}") {
     new TestSets {
-      val s = diff(sA, sB)
-      assert(contains(s, 4), "Union 4")
-      assert(!contains(s, 5), "Union 5")
-      assert(contains(s, 6), "Union 6")
+      val s = diff(Set(1,3,4,5,7,1000), Set(1,2,3,4))
+      assert(FunSets.toString(s) == "{5,7,1000}", "Match: " + FunSets.toString(s))
     }
-  }  
+  }    
   
-  test("intersect contains restricted elements") {
+  test("intersect of {1,2,3,4,5} and {5,6,7,8,9,10}") {
     new TestSets {
-      val s = intersect(sA, sB)
-      assert(!contains(s, 4), "Union 1")
-      assert(contains(s, 5), "Union 3")      
-      assert(!contains(s, 6), "Union 2")
+      val s = intersect(Set(1,2,3,4,5), Set(5,6,7,8,9,10))
+      assert(FunSets.toString(s) == "{5}", "Match: " + FunSets.toString(s))
     }
   }   
   
-  test("filter (x < 3) union contains all elements") {
+  test("filter {1,2,3,4,5} by (_ < 4)") {
     new TestSets {
-      val s = filter(sA, (x: Int) => x < 3)
-      assert(contains(s, 2), "Union 1")
-      assert(!contains(s, 3), "Union 3")      
-      assert(!contains(s, 4), "Union 2")
+      val s = filter(Set(1,2,3,4,5), { _ < 4 } )
+      assert(FunSets.toString(s) == "{1,2,3}", "Match: " + FunSets.toString(s))
     }
   }  
+  
+  test("exists {1,2,3,4,5} in which (_ < 4)") {
+    new TestSets {
+      val r = exists(Set(1,2,3,4,5), { _ < 4 })
+      assert(r, "r: " + r)
+    }
+  }
+  
+  test("not exists {1,2,3,4,5} in which (_ > 10)") {
+    new TestSets {
+      val r = exists(Set(1,2,3,4,5), { _ > 10 })
+      assert(!r, "r: " + r)
+    }
+  } 
+  
+  test("map {1,2,3} to {-3,-2,-1}") {
+    new TestSets {
+      val s = map(Set(1,2,3), x => -x)
+      val r = FunSets.toString(s)
+      assert(r == "{-3,-2,-1}", "Map: " + r)
+    }
+  }   
 }

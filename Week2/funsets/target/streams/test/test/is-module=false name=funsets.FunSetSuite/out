@@ -3,7 +3,10 @@
 [0m[[0minfo[0m] [0m[32m- adding ints[0m[0m
 [0m[[0minfo[0m] [0m[32m- contains is implemented[0m[0m
 [0m[[0minfo[0m] [0m[32m- singletonSet(1) contains 1[0m[0m
-[0m[[0minfo[0m] [0m[32m- union contains all elements[0m[0m
-[0m[[0minfo[0m] [0m[32m- diff contains restricted elements[0m[0m
-[0m[[0minfo[0m] [0m[32m- intersect contains restricted elements[0m[0m
-[0m[[0minfo[0m] [0m[32m- filter (x < 3) union contains all elements[0m[0m
+[0m[[0minfo[0m] [0m[32m- union of {1,2,3,4,5} and {5,6,7,8,9,10}[0m[0m
+[0m[[0minfo[0m] [0m[32m- diff of {1..1000} and {1,2,3,4}[0m[0m
+[0m[[0minfo[0m] [0m[32m- intersect of {1,2,3,4,5} and {5,6,7,8,9,10}[0m[0m
+[0m[[0minfo[0m] [0m[32m- filter {1,2,3,4,5} by (_ < 4)[0m[0m
+[0m[[0minfo[0m] [0m[32m- exists {1,2,3,4,5} in which (_ < 4)[0m[0m
+[0m[[0minfo[0m] [0m[32m- not exists {1,2,3,4,5} in which (_ > 10)[0m[0m
+[0m[[0minfo[0m] [0m[32m- map {1,2,3} to {-3,-2,-1}[0m[0m

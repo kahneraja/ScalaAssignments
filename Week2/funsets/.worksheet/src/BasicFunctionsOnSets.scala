@@ -2,9 +2,9 @@
 object BasicFunctionsOnSets {
   
 	type Set = Int => Boolean;import org.scalaide.worksheet.runtime.library.WorksheetSupport._; def main(args: Array[String])=$execute{;$skip(112); 
-	def contains(s: Set, elem: Int): Boolean = s(elem);System.out.println("""contains: (s: BasicFunctionsOnSets.Set, elem: Int)Boolean""");$skip(23); 
- 	var s = Set(1,2,3,4);System.out.println("""s  : scala.collection.immutable.Set[Int] = """ + $show(s ));$skip(23); 
- 	var t = Set(4,5,6,7);System.out.println("""t  : scala.collection.immutable.Set[Int] = """ + $show(t ));$skip(18); val res$0 = 
+	def contains(s: Set, elem: Int): Boolean = s(elem);System.out.println("""contains: (s: BasicFunctionsOnSets.Set, elem: Int)Boolean""");$skip(30); 
+ 	var s = Set(1,3,4,5,7,1000);System.out.println("""s  : scala.collection.immutable.Set[Int] = """ + $show(s ));$skip(23); 
+ 	var t = Set(1,2,3,4);System.out.println("""t  : scala.collection.immutable.Set[Int] = """ + $show(t ));$skip(18); val res$0 = 
 
  	contains(s, 3);System.out.println("""res0: Boolean = """ + $show(res$0));$skip(17); val res$1 = 
  	contains(s, 4);System.out.println("""res1: Boolean = """ + $show(res$1));$skip(50); 
@@ -20,10 +20,10 @@ object BasicFunctionsOnSets {
   def intersect(s: Set, t: Set): Set =
   	(x: Int) => contains(s,x) && contains(t,x);System.out.println("""intersect: (s: BasicFunctionsOnSets.Set, t: BasicFunctionsOnSets.Set)BasicFunctionsOnSets.Set""");$skip(120); 
   def diff(s: Set, t: Set): Set =
-  	(x: Int) => (contains(s,x) && !contains(t,x)) || (!contains(s,x) && contains(t,x));System.out.println("""diff: (s: BasicFunctionsOnSets.Set, t: BasicFunctionsOnSets.Set)BasicFunctionsOnSets.Set""");$skip(70); 
+  	(x: Int) => (contains(s,x) && !contains(t,x)) || (!contains(s,x) && contains(t,x));System.out.println("""diff: (s: BasicFunctionsOnSets.Set, t: BasicFunctionsOnSets.Set)BasicFunctionsOnSets.Set""");$skip(105); 
   
   def filter(s: Set, p: Int => Boolean): Set =
-  	(x: Int) => p(x);System.out.println("""filter: (s: BasicFunctionsOnSets.Set, p: Int => Boolean)BasicFunctionsOnSets.Set""");$skip(21); 
+  	{elem: Int => contains(s,elem) && contains(p,elem)};System.out.println("""filter: (s: BasicFunctionsOnSets.Set, p: Int => Boolean)BasicFunctionsOnSets.Set""");$skip(21); 
   var u = union(s,t);System.out.println("""u  : BasicFunctionsOnSets.Set = """ + $show(u ));$skip(17); val res$4 = 
   contains(u, 1);System.out.println("""res4: Boolean = """ + $show(res$4));$skip(16); val res$5 = 
 	contains(u, 2);System.out.println("""res5: Boolean = """ + $show(res$5));$skip(16); val res$6 = 
@@ -56,12 +56,8 @@ object BasicFunctionsOnSets {
 	
 	var f = filter(s, (x:Int) => x == 3);System.out.println("""f  : BasicFunctionsOnSets.Set = """ + $show(f ));$skip(16); val res$28 = 
 	contains(f, 1);System.out.println("""res28: Boolean = """ + $show(res$28));$skip(16); val res$29 = 
-	contains(f, 2);System.out.println("""res29: Boolean = """ + $show(res$29));$skip(106); 
-	
-	// def intersect(s: Set, t: Set): Set
-	// def diff(s: Set, t: Set): Set
-	
-	var hundred = Set{1...100};System.out.println("""hundred  : <error> = """ + $show(hundred ))}
+	contains(f, 2);System.out.println("""res29: Boolean = """ + $show(res$29))}
+
 	
 	
 }
